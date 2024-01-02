@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useCallback } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const ButtonComponent = () => {
+    const [count1, setCount1] = useState(0);
+    const [count2, setCount2] = useState(0);
 
-export default App;
+    // Используем useCallback для мемоизации колбэк-функций
+    const handleClick1 = useCallback(() => {
+        setCount1(count1 + 1);
+    }, [count1]);
+
+    const handleClick2 = useCallback(() => {
+        setCount2(count2 + 1);
+    }, [count2]);
+
+    return (
+        <div>
+            <button onClick={handleClick1}>Кнопка 1: {count1}</button>
+            <button onClick={handleClick2}>Кнопка 2: {count2}</button>
+        </div>
+    );
+};
+
+export default ButtonComponent;
